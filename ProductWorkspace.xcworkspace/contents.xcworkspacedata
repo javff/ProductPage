@@ -12,6 +12,9 @@
       location = "container:"
       name = "Libs">
       <FileRef
+         location = "group:../JJUITestApp/JJUITestApp.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:JJUI">
       </FileRef>
    </Group>

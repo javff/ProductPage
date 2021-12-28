@@ -13,6 +13,7 @@ struct ContentView: View {
     var config = ButtonConfiguration(size: .large, type: .primary)
     @State var tapped = true
     @State var buttonState = ButtonState.idle
+    @State var disableState = ButtonState.disabled
     
     var body: some View {
         
@@ -26,7 +27,6 @@ struct ContentView: View {
                         configuration: config,
                         state: $buttonState
                     ) {
-                        print("asdadad")
                         tapped.toggle()
                         let newState: ButtonState = tapped ? .idle : .loading
                         buttonState = newState
@@ -48,7 +48,7 @@ struct ContentView: View {
                         text: "Disabled",
                         icon: nil,
                         configuration: .init(size: .large, type: .secondary),
-                        state: $buttonState
+                        state: $disableState
                     ) {}
                     
                     Spacer()
@@ -74,7 +74,7 @@ struct ContentView: View {
                         text: "Disabled",
                         icon: nil,
                         configuration: .init(size: .medium, type: .secondary),
-                        state: $buttonState
+                        state: $disableState
                     ) {}
                     
                     Spacer()
@@ -100,7 +100,7 @@ struct ContentView: View {
                         text: "Disabled",
                         icon: nil,
                         configuration: .init(size: .small, type: .secondary),
-                        state: $buttonState
+                        state: $disableState
                     ) {}
                     
                     Spacer()
@@ -124,7 +124,7 @@ struct ContentView: View {
                     text: "Disabled",
                     icon: nil,
                     configuration: .init(size: .fullWidth, type: .secondary),
-                    state: $buttonState
+                    state: $disableState
                 ) {}
                 
         }.frame(maxWidth: .infinity)
