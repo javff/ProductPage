@@ -10,13 +10,23 @@ import JJUI
 
 struct ButtonsPage: View {
     var config = ButtonConfiguration(size: .large, type: .primary)
-    @State var tapped = true
+    @State var isLoading = false
     @State var buttonState = ButtonState.idle
     @State var disableState = ButtonState.disabled
     
     var body: some View {
         
             VStack(spacing: 20) {
+                
+                HStack {
+                    Toggle(isOn: $isLoading) {
+                        Text("Show Loading")
+                    }.onChange(of: isLoading) { newValue in
+                        let newState: ButtonState = isLoading ? .loading : .idle
+                        buttonState = newState
+                    }
+                }
+                .padding()
                 
                 HStack(spacing: 5) {
                     Spacer()
@@ -25,14 +35,9 @@ struct ButtonsPage: View {
                         icon: nil,
                         configuration: config,
                         state: $buttonState
-                    ) {
-                        tapped.toggle()
-                        let newState: ButtonState = tapped ? .idle : .loading
-                        buttonState = newState
-                    }
+                    ) { }
                     
                     Spacer()
-
                     
                     JJUIButton(
                         text: "Secondary",
