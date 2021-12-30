@@ -54,6 +54,22 @@ struct ButtonsPage: View {
                 }
                 
                 HStack(spacing: 5) {
+                    JJUIButton(
+                        text: "Icon Left",
+                        icon: AppButtonIcon(position: .left, name: "star.fill"),
+                        configuration: .init(size: .large, type: .primary),
+                        state: $buttonState
+                    ) { }
+                    
+                    JJUIButton(
+                        text: "Icon Right",
+                        icon: AppButtonIcon(position: .right, name: "star.fill"),
+                        configuration: .init(size: .large, type: .secondary),
+                        state: $buttonState
+                    ) { }
+                }
+                
+                HStack(spacing: 5) {
                     Spacer()
                     JJUIButton(
                         text: "Primary",

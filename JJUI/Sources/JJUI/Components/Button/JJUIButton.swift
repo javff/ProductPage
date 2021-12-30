@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// This UIComponents represent a button with standard look and feel.
 public struct JJUIButton: View {
     
     public var configuration: ButtonConfiguration
@@ -15,6 +16,13 @@ public struct JJUIButton: View {
     public let text: String
     public let icon: AppButtonIcon?
     
+    /// Init
+    /// - Parameters:
+    ///   - text: A text to display on the button.
+    ///   - icon: A icon to display on the button.
+    ///   - configuration: Configuration object that required for styling of button
+    ///   - state: Represents the state of the button.
+    ///   - action: Action handler.
     public init(text: String,
                 icon: AppButtonIcon? = nil,
                 configuration: ButtonConfiguration,
@@ -32,23 +40,24 @@ public struct JJUIButton: View {
             self.action()
         }) {
             
-            if let icon = icon, icon.position == .left {
-                Image(systemName: icon.name)
-            }
-            
-            ZStack {
+            HStack {
+                if let icon = icon, icon.position == .left {
+                    Image(systemName: icon.name)
+                }
                 
-                if state == .loading {
-                    JJUIProgressIndicator(configuration: configuration.progressIndicatorConfiguration)
-                } else {
-                    Text(text)
+                ZStack {
+                    
+                    if state == .loading {
+                        JJUIProgressIndicator(configuration: configuration.progressIndicatorConfiguration)
+                    } else {
+                        Text(text)
+                    }
+                }
+
+                if let icon = icon, icon.position == .right {
+                    Image(systemName: icon.name)
                 }
             }
-
-            if let icon = icon, icon.position == .right {
-                Image(systemName: icon.name)
-            }
-                
         }
         .buttonStyle(ButtonConfigurationProvider(configuration: configuration, state: state))
     }
