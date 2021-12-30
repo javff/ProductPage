@@ -12,14 +12,14 @@ struct ContentView: View {
     
     let pages = Component.allCases
     @State var buttonState = ButtonState.idle
-    @EnvironmentObject var router: Navigator
+    @EnvironmentObject var navigator: Navigator
     
     var body: some View {
         
         NavigationView {
             VStack(alignment: .center, spacing: 16) {
 
-                NavigationRoute(router: router)
+                NavigationRoute(navigator: navigator)
                 
                 ForEach(pages, id: \.self) { (component) in
                     JJUIButton(
@@ -29,7 +29,7 @@ struct ContentView: View {
                             type: .primary
                         ),
                         state: $buttonState) {
-                            self.router.navigate(to: component)
+                            self.navigator.navigate(to: component)
                         }
                 }
             }

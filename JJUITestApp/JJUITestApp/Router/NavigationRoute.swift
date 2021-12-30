@@ -9,12 +9,12 @@ import SwiftUI
 
 struct NavigationRoute: View {
     
-    @ObservedObject var router: Navigator
+    @ObservedObject var navigator: Navigator
     
     var body: some View {
         NavigationLink(
-            destination: router.currentView,
-            tag: router.currentViewId,
-            selection: $router.destinationId) { EmptyView() }
+            destination: navigator.currentView,
+            tag: navigator.currentViewId,
+            selection: $navigator.destinationId) { EmptyView() }
     }
 }
