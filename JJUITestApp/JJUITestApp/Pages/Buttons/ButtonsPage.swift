@@ -1,15 +1,14 @@
 //
-//  ContentView.swift
-//  ProductPage
+//  ButtonsPage.swift
+//  JJUITestApp
 //
-//  Created by Juan Andres Vasquez Ferrer on 30-11-21.
+//  Created by Juan Andres Vasquez Ferrer on 28-12-21.
 //
 
 import SwiftUI
 import JJUI
 
-struct ContentView: View {
-    
+struct ButtonsPage: View {
     var config = ButtonConfiguration(size: .large, type: .primary)
     @State var tapped = true
     @State var buttonState = ButtonState.idle
@@ -132,8 +131,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct Buttons_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ButtonsPage()
     }
 }

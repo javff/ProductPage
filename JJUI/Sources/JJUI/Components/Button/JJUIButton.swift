@@ -37,12 +37,12 @@ public struct JJUIButton: View {
             }
             
             ZStack {
-                let loading = state == .loading
-                Text(text)
-                    .opacity(loading ? 0 : 1)
                 
-                JJUIProgressIndicator(configuration: configuration.progressIndicatorConfiguration)
-                    .opacity(loading ? 1 : 0)
+                if state == .loading {
+                    JJUIProgressIndicator(configuration: configuration.progressIndicatorConfiguration)
+                } else {
+                    Text(text)
+                }
             }
 
             if let icon = icon, icon.position == .right {
