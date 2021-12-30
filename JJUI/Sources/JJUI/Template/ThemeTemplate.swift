@@ -21,6 +21,10 @@ public protocol ThemeFontTemplate: AnyObject {
     var titleL: Font { get }
     var titleM: Font { get }
     var titleS: Font { get }
+    
+    var labelL: Font { get }
+    var labelM: Font { get }
+    var labelS: Font { get }
 }
 
 public struct ThemeConfiguration {
@@ -76,6 +80,10 @@ final public class ThemeFont: ThemeFontTemplate {
     public var titleL: Font = .system(size: 16)
     public var titleM: Font = .system(size: 14)
     public var titleS: Font = .system(size: 12)
+    
+    public var labelL: Font = .system(size: 22)
+    public var labelM: Font = .system(size: 20)
+    public var labelS: Font = .system(size: 18)
     
     public init() {}
 }

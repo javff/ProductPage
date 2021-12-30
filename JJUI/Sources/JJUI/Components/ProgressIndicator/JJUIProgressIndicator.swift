@@ -66,6 +66,6 @@ struct JJUIProgressIndicator_Previews: PreviewProvider {
         let themeFont = ThemeFont()
         let theme = ThemeConfiguration(color: themeColor, font: themeFont)
         ThemeManager.configure(theme: theme)
-        return JJUIProgressIndicator(configuration: ProgressIndicatorConfiguration(size: .large))
+        return JJUIProgressIndicator(configuration: ProgressIndicatorConfiguration(size: .large, color: .brown))
     }
 }

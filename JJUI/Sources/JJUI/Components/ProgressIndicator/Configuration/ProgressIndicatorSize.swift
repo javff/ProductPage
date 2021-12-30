@@ -8,7 +8,9 @@
 import Foundation
 
 public enum ProgressIndicatorSize {
+    case xLarge
     case large
     case medium
     case small
+    case xSmall
 }
