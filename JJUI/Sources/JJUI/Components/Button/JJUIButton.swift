@@ -53,26 +53,3 @@ public struct JJUIButton: View {
         .buttonStyle(ButtonConfigurationProvider(configuration: configuration, state: state))
     }
 }
-
-struct JJUIButton_Previews: PreviewProvider {
-    
-    
-    
-    static var previews: some View {
-        
-        let themeColor = ThemeColor()
-        let themeFont = ThemeFont()
-        let theme = ThemeConfiguration(color: themeColor, font: themeFont)
-        ThemeManager.configure(theme: theme)
-        @State var buttonState = ButtonState.idle
-
-        return Group {
-            JJUIButton(
-                text: "Hola que tal",
-                icon: nil,
-                configuration: .init(size: .large, type: .secondary),
-                state: $buttonState
-            ) {}    
-        }
-    }
-}
