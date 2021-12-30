@@ -6,15 +6,46 @@
 //
 
 import SwiftUI
+import JJUI
 
 struct ProgressIndicatorPage: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct ProgressIndicatorPage_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgressIndicatorPage()
+        VStack {
+            
+            HStack(spacing: 20) {
+                Text("Extra Large")
+                JJUIProgressIndicator(
+                    configuration: ProgressIndicatorConfiguration(size: .xLarge, color: .blue)
+                )
+            }
+            
+            HStack(spacing: 20) {
+                Text("Large")
+                JJUIProgressIndicator(
+                    configuration: ProgressIndicatorConfiguration(size: .large, color: .blue)
+                )
+            }
+            
+            HStack(spacing: 20) {
+                Text("Medium")
+                JJUIProgressIndicator(
+                    configuration: ProgressIndicatorConfiguration(size: .medium, color: .blue)
+                )
+            }
+            
+            HStack(spacing: 20) {
+                Text("Small")
+                JJUIProgressIndicator(
+                    configuration: ProgressIndicatorConfiguration(size: .small, color: .blue)
+                )
+            }
+            
+            HStack(spacing: 20) {
+                Text("Extra Small")
+                JJUIProgressIndicator(
+                    configuration: ProgressIndicatorConfiguration(size: .small, color: .blue)
+                )
+            }
+        }
     }
 }

@@ -15,10 +15,18 @@ public struct ButtonConfiguration {
     
     public var progressIndicatorConfiguration: ProgressIndicatorConfiguration {
         switch size {
-        case .small: return ProgressIndicatorConfiguration(size: .small)
-        case .medium: return  ProgressIndicatorConfiguration(size: .medium)
-        case .large, .fullWidth: return ProgressIndicatorConfiguration(size: .large)
+        case .small: return ProgressIndicatorConfiguration(size: .xSmall, color: progressIndicatorColor)
+        case .medium: return  ProgressIndicatorConfiguration(size: .small, color: progressIndicatorColor)
+        case .large, .fullWidth: return ProgressIndicatorConfiguration(size: .medium, color: progressIndicatorColor)
         }
+    }
+    
+    var progressIndicatorColor: Color {
+        if type == .secondary {
+            return ThemeManager.shared.colorPallete.primary
+        }
+        
+        return .white
     }
     
     public init(size: ButtonSize, type: ButtonType) {
