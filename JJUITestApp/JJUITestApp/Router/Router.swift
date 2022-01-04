@@ -12,7 +12,8 @@ class Router: RouterProtocol {
     var routeMap: [Component : RouteProtocol] {
         [
             .buttons: ButtonRoute(),
-            .progressIndicator: ProgressIndicatorRoute()
+            .progressIndicator: ProgressIndicatorRoute(),
+            .gallery: GalleryRoute()
         ]
     }
    
