@@ -10,9 +10,14 @@ import SwiftUI
 struct GalleryView: View {
     
     let images: [String]
-    let renderContentMode: ContentMode
-    
-    @State var currentStep: Int = 0
+    var tapHandler:(() -> Void)?
+    @Binding var currentStep: Int
+        
+    init(images: [String], currentStep: Binding<Int>, tapHandler:(() -> Void)? = nil) {
+        self.images = images
+        self.tapHandler = tapHandler
+        self._currentStep = currentStep
+    }
     
     var body: some View {
         GeometryReader { reader in
@@ -22,16 +27,23 @@ struct GalleryView: View {
                         url: URL(string: "\(images[index])"),
                         content: { image in
                             image.resizable()
-                                .aspectRatio(contentMode: renderContentMode)
+                                .aspectRatio(contentMode: .fit)
                         },
                         placeholder: {
                             ProgressView()
                         }
-                    ).tag(index)
+                    )
+                        .tag(index)
+                        .onTapGesture {
+                            tapHandler?()
+                        }
                 }
             }
             .frame(width: reader.size.width, height: reader.size.height, alignment: .center)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+        }
+        .onAppear {
+            currentStep = currentStep
         }
     }
 }

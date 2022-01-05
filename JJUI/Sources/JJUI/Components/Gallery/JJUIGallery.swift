@@ -25,30 +25,23 @@ public struct JJUIGallery: View {
         self.images = images
     }
     
+    @State private var isFullScreenPresented = false
+
+    
     public var body: some View {
         ZStack(alignment: .topLeading) {
-            GeometryReader { reader in
-                    TabView(selection: $currentStep) {
-                        ForEach(0..<images.count) { index in
-                            AsyncImage(
-                                url: URL(string: "\(images[index])"),
-                                content: { image in
-                                    image.resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                },
-                                placeholder: {
-                                    ProgressView()
-                                }
-                            ).tag(index)
-                        }
-                    }
-                    .frame(width: reader.size.width, height: reader.size.height, alignment: .center)
-                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                
-                StepperView(text: stepperText)
+            
+            GalleryView(images: images, currentStep: $currentStep) {
+                isFullScreenPresented.toggle()
             }
+            
+            StepperView(text: stepperText)
         }
         .frame(maxWidth: .infinity, maxHeight: 300)
         .padding()
+        .fullScreenCover(isPresented: $isFullScreenPresented) {
+            FullScreenElementView(images: images, currentStep: $currentStep)
+        }
     }
+
 }
