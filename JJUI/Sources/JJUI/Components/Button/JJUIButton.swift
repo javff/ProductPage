@@ -10,11 +10,11 @@ import SwiftUI
 /// This UIComponents represent a button with standard look and feel.
 public struct JJUIButton: View {
     
+    public let text: String
+    public let icon: AppButtonIcon?
     public var configuration: ButtonConfiguration
     @Binding public var state: ButtonState
     public var action: (() -> Void)
-    public let text: String
-    public let icon: AppButtonIcon?
     
     /// Init
     /// - Parameters:
@@ -35,23 +35,21 @@ public struct JJUIButton: View {
         self._state = state
     }
     
-    public var body: some View {        
+    public var body: some View {
         Button(action: {
             self.action()
         }) {
-            
             HStack {
                 if let icon = icon, icon.position == .left {
                     Image(systemName: icon.name)
                 }
                 
                 ZStack {
-                    
-                    if state == .loading {
-                        JJUIProgressIndicator(configuration: configuration.progressIndicatorConfiguration)
-                    } else {
-                        Text(text)
-                    }
+                    JJUIProgressIndicator(configuration: configuration.progressIndicatorConfiguration)
+                        .isHidden(state != .loading, remove: true)
+                        
+                    Text(text)
+                        .isHidden(state == .loading, remove: false)
                 }
 
                 if let icon = icon, icon.position == .right {

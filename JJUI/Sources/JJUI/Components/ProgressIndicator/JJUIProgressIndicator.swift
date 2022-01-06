@@ -32,31 +32,32 @@ struct CircleProgressBar: View {
             Circle()
                 .stroke(lineWidth: configuration.progressLineWidth)
                 .foregroundColor(.clear)
+            
             Circle()
                 .trim(from: animateStrokeStart ? 1/3 : 1/9, to: animateStrokeEnd ? 2/5 : 1)
                 .stroke(style: StrokeStyle(lineWidth: configuration.progressLineWidth, lineCap: .round, lineJoin: .round))
                 .foregroundColor(configuration.ringColor)
                 .rotationEffect(.degrees(isRotating ? 360 : 0))
+                .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: self.isRotating)
+                .animation(.linear(duration: 1).delay(0.5).repeatForever(autoreverses: true), value: self.animateStrokeStart)
+                .animation(.linear(duration: 1).delay(1).repeatForever(autoreverses: true), value: self.animateStrokeEnd)
                 .onAppear() {
-                    
-                    withAnimation(.linear(duration: 1).repeatForever(autoreverses: false))
-                    {
-                        self.isRotating.toggle()
-                    }
-                    
-                    withAnimation(.linear(duration: 1).delay(0.5).repeatForever(autoreverses: true))
-                    {
-                        self.animateStrokeStart.toggle()
-                    }
-                    
-                    withAnimation(.linear(duration: 1).delay(1).repeatForever(autoreverses: true))
-                    {
-                        self.animateStrokeEnd.toggle()
-                    }
+                    self.isRotating.toggle()
+                    delay(0.5) { self.animateStrokeStart.toggle() }
+                    delay(1.0) { self.animateStrokeEnd.toggle() }
                 }
         }
         .frame(width: configuration.size.width, height: configuration.size.height)
         .padding()
+    }
+    
+    // MARK: - METHOD
+    
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC),
+            execute: closure
+        )
     }
 }
 
