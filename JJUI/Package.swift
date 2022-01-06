@@ -13,6 +13,7 @@ let package = Package(
             targets: ["JJUI"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/SDWebImage/SDWebImageSwiftUI.git", from: "2.0.0")
         // Dependencies declare other packages that this package depends on.
     ],
     targets: [
@@ -20,7 +21,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "JJUI",
-            dependencies: []),
+            dependencies: ["SDWebImageSwiftUI"]),
         .testTarget(
             name: "JJUITests",
             dependencies: ["JJUI"]),
