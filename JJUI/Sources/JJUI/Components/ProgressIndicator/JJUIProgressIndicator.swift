@@ -43,21 +43,12 @@ struct CircleProgressBar: View {
                 .animation(.linear(duration: 1).delay(1).repeatForever(autoreverses: true), value: self.animateStrokeEnd)
                 .onAppear() {
                     self.isRotating.toggle()
-                    delay(0.5) { self.animateStrokeStart.toggle() }
-                    delay(1.0) { self.animateStrokeEnd.toggle() }
+                    DispatchQueue.main.delay(milisenconds: 5) { self.animateStrokeStart.toggle() }
+                    DispatchQueue.main.delay(seconds: 1) { self.animateStrokeEnd.toggle() }
                 }
         }
         .frame(width: configuration.size.width, height: configuration.size.height)
         .padding()
-    }
-    
-    // MARK: - METHOD
-    
-    func delay(_ delay:Double, closure:@escaping ()->()) {
-        DispatchQueue.main.asyncAfter(
-            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC),
-            execute: closure
-        )
     }
 }
 
